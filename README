@@ -47,8 +47,9 @@ API Usage Examples:
 
 
 BUILDING:
-To generate autoconf files:
- $ autoreconf --install
+To re-generate autoconf files:
+ $ ./autogen.sh
+ . Note: this was originally done on Ubuntu 14.04.5
 
 
 
