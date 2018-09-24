@@ -1,5 +1,52 @@
 
 
+libdcwproto -- Dual-channel Wi-Fi protocol serialization/marshaling library.
+
+
+API Usage Examples:
+
+  . To marshal a DCW message from a raw buffer:
+
+    #include <dcwproto.h>
+    #include <stdio.h>
+
+    #define SUCCESS 1
+    #define FAILURE 0
+    int example_dcw_marshal(struct dcwmsg * const output, const unsigned char * const buf, const unsigned buf_len) {
+      if (!dcwmsg_marshal(output, buf, buf_len)) {
+        return FAILURE;
+      }
+
+      /* "output" now contains the marshal'd DCW message */
+      fprintf(stderr, "Successfully marshal'd DCW message:\n");
+      dcwmsg_dbgdump(output); /* dumps message to stderr */
+      return SUCCESS;
+    }
+
+  . To serialize a DCW message into a raw buffer:
+
+    #include <dcwproto.h>
+    #include <stdio.h>
+
+    #define FAILURE 0
+    unsigned example_dcw_serialize(unsigned char * const buf, const struct dcwmsg * const input, const unsigned buf_len) {
+      unsigned serialized_size;
+
+      serialized_size = dcwmsg_serialize(buf, input, buf_len);
+      if (serialized_size == 0) {
+        return FAILURE;
+      }
+
+      /* "buf" now contains the serialized DCW message */
+      fprintf(stderr, "Successfully serialized DCW message:\n");
+      dcwmsg_dbgdump(input); /* dumps message to stderr */
+      return serialized_size;
+    }
+
+
+
+
+BUILDING:
 To generate autoconf files:
  $ autoreconf --install
 
