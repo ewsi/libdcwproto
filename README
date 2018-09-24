@@ -1,0 +1,7 @@
+
+
+To generate autoconf files:
+ $ autoreconf --install
+
+
+
