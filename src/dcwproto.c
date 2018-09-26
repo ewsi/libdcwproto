@@ -502,14 +502,13 @@ dcwmsg_dbgdump(const struct dcwmsg * const msg) {
     }
     break;
 
-    case DCWMSG_AP_ACK_DISCONNECT:
-      fprintf(f, "  Type: AP ACK Station Disconnect\n");
-      break;
+  case DCWMSG_AP_ACK_DISCONNECT:
+    fprintf(f, "  Type: AP ACK Station Disconnect\n");
+    break;
 
-    case DCWMSG_AP_QUIT:
-      fprintf(f, "  Type: AP Quit\n");
-      break;
-
+  case DCWMSG_AP_QUIT:
+    fprintf(f, "  Type: AP Quit\n");
+    break;
 
   default:
     fprintf(f, "  Type: Unknown\n");
