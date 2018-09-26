@@ -1,0 +1,13 @@
+LIBRARY libdcwproto
+EXPORTS
+  dcwmsg_marshal                 @1
+  dcwmsg_serialize               @2
+  dcwmsg_dbgdump                 @3
+  dcwprotocs_read_msgtype        @4
+  dcwprotocs_serialize_join      @5
+  dcwprotocs_serialize_unjoin    @6
+  dcwprotocs_serialize_staack    @7
+  dcwprotocs_serialize_stanack   @8
+  dcwprotocs_marshal_acceptsta   @9
+  dcwprotocs_marshal_rejectsta   @10
+

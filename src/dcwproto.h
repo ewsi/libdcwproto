@@ -21,6 +21,12 @@
 #ifndef DCWPROTO_H_INCLUDED
 #define DCWPROTO_H_INCLUDED
 
+#ifdef WIN32
+#define WIN32_EXPORT __declspec(dllexport) __cdecl
+#else
+#define WIN32_EXPORT
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -93,9 +99,9 @@ struct dcwmsg {
   };
 };
 
-int dcwmsg_marshal(struct dcwmsg * const /* output */, const unsigned char * const /* buf */, const unsigned /* buf_len */);
-unsigned dcwmsg_serialize(unsigned char * const /* buf */, const struct dcwmsg * const /* input */, const unsigned /* buf_len */);
-void dcwmsg_dbgdump(const struct dcwmsg * const /* msg */);
+int WIN32_EXPORT dcwmsg_marshal(struct dcwmsg * const /* output */, const unsigned char * const /* buf */, const unsigned /* buf_len */);
+unsigned WIN32_EXPORT dcwmsg_serialize(unsigned char * const /* buf */, const struct dcwmsg * const /* input */, const unsigned /* buf_len */);
+void WIN32_EXPORT dcwmsg_dbgdump(const struct dcwmsg * const /* msg */);
 
 
 #ifdef __cplusplus
