@@ -20,7 +20,12 @@
 
 
 
+#ifdef WIN32
+#define bzero(ptr, size) memset(ptr, 0, size)
+#else
 #include <config.h>
+#include <strings.h>
+#endif
 #include <dcwproto.h>
 
 #include <string.h>
@@ -161,7 +166,7 @@ dcwmsg_marshal_ap_reject_sta(struct dcwmsg_ap_reject_sta * const output, const u
   return 1; /* success */
 }
 
-int
+int WIN32_EXPORT
 dcwmsg_marshal(struct dcwmsg * const output, const unsigned char * const buf, const unsigned buf_len) {
   if (buf_len < 1) return 0; /* marshal failed */
   switch( output->id = (enum dcwmsg_id)buf[0] ) {
@@ -331,7 +336,7 @@ dcwmsg_serialize_ap_reject_sta(unsigned char *buf, const struct dcwmsg_ap_reject
   return buf_len - buf_remaining;
 }
 
-unsigned
+unsigned WIN32_EXPORT
 dcwmsg_serialize(unsigned char * const buf, const struct dcwmsg * const input, const unsigned buf_len) {
   unsigned rv;
 
@@ -393,7 +398,7 @@ fprintf_macaddr(FILE * const f, const unsigned char * const macaddr) {
   );
 }
 
-void
+void WIN32_EXPORT
 dcwmsg_dbgdump(const struct dcwmsg * const msg) {
 
   FILE *f;
@@ -495,6 +500,14 @@ dcwmsg_dbgdump(const struct dcwmsg * const msg) {
       fprintf_macaddr(f, msg->ap_reject_sta.data_macaddrs[i]);
       fprintf(f, "\n");
     }
+    break;
+
+  case DCWMSG_AP_ACK_DISCONNECT:
+    fprintf(f, "  Type: AP ACK Station Disconnect\n");
+    break;
+
+  case DCWMSG_AP_QUIT:
+    fprintf(f, "  Type: AP Quit\n");
     break;
 
   default:
