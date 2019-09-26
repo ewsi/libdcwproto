@@ -386,7 +386,7 @@ dcwmsg_serialize(unsigned char * const buf, const struct dcwmsg * const input, c
 
 */
 #include <stdio.h>
-static inline void
+static void
 fprintf_macaddr(FILE * const f, const unsigned char * const macaddr) {
   fprintf(f, "%02X-%02X-%02X-%02X-%02X-%02X",
           (unsigned)macaddr[0],
