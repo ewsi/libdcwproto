@@ -20,12 +20,8 @@
 
 
 
-#ifdef WIN32
-#define bzero(ptr, size) memset(ptr, 0, size)
-#else
 #include <config.h>
 #include <strings.h>
-#endif
 #include <dcwproto.h>
 
 #ifndef _POSIX_C_SOURCE
@@ -98,7 +94,7 @@ dcwmsg_marshal_sta_ack(struct dcwmsg_sta_ack * const output, const unsigned char
 
     /* copy in the data ssid string bytes */
     if (buf_len < copy_size) return 0;
-    bzero(output->bonded_data_channels[i].ssid, sizeof(output->bonded_data_channels[i].ssid));
+    memset(output->bonded_data_channels[i].ssid, 0, sizeof(output->bonded_data_channels[i].ssid));
     memcpy(output->bonded_data_channels[i].ssid, buf, copy_size);
     buf_len -= copy_size;
     buf += copy_size;
@@ -137,7 +133,7 @@ dcwmsg_marshal_ap_accept_sta(struct dcwmsg_ap_accept_sta * const output, const u
 
     /* copy in the data ssid string bytes */
     if (buf_len < copy_size) return 0;
-    bzero(output->data_ssids[i], sizeof(output->data_ssids[i]));
+    memset(output->data_ssids[i], 0, sizeof(output->data_ssids[i]));
     memcpy(output->data_ssids[i], buf, copy_size);
     buf_len -= copy_size;
     buf += copy_size;
